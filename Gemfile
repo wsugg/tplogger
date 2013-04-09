@@ -26,6 +26,10 @@ end
 gem 'jquery-rails'
 gem 'simple_form'
 
+group :development do
+  gem 'better_errors'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
