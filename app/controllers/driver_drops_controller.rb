@@ -5,6 +5,6 @@ class DriverDropsController < ApplicationController
  end
 
  def new
- 	@driver_drop = Driver_Drop.new
+ 	@driver_drop = DriverDrop.new
  end
 end
