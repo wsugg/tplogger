@@ -1,6 +1,10 @@
 class DriverDropsController < ApplicationController
 
  def index
- 	binding.pry
+
+ end
+
+ def new
+ 	@driver_drop = Driver_Drop.new
  end
 end
