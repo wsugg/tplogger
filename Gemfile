@@ -29,6 +29,7 @@ gem 'simple_form'
 group :test, :development do
   gem 'better_errors'
   gem 'rspec-rails', '~> 2.13.0'
+  gem 'pry-rails'
 end
 
 group :test do
