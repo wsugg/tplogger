@@ -26,8 +26,13 @@ end
 gem 'jquery-rails'
 gem 'simple_form'
 
-group :development do
+group :test, :development do
   gem 'better_errors'
+  gem 'rspec-rails', '~> 2.13.0'
+end
+
+group :test do
+  gem 'capybara', '2.0.3'
 end
 
 # To use ActiveModel has_secure_password
