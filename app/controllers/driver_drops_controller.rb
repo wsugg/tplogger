@@ -55,5 +55,7 @@ class DriverDropsController < ApplicationController
 
   def show
     @driver_drop = DriverDrop.find(params[:id])
+    @log = Log.where({:driver_drop_id => params[:id]})
+    #binding.pry
   end
 end
