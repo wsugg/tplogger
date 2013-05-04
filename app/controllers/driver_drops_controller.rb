@@ -38,6 +38,26 @@ class DriverDropsController < ApplicationController
    end
  end
 
+def edit
+  @driver_drop = DriverDrop.find(params[:id])
+  
+  
+  flash[:warning] = "This is a warning flash message"
+  flash[:info] = "This is a info flash message"
+end
+
+def update
+  @driver_drop = DriverDrop.find(params[:id])
+
+  if @driver_drop = @driver_drop.update_attributes(params[:driver_drop])
+    flash[:success] = "Driver Drop was changed."
+    redirect_to driver_drop_path
+  else
+    flash[:error] = "Driver Drop was not changed."
+    render action: "edit"
+  end
+end
+
 def show
   @driver_drop = DriverDrop.find(params[:id])
 end

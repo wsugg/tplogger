@@ -10,10 +10,33 @@
    <td><%= @driver_drop.id %></td>
    <td><%= @driver_drop.branch %></td>
    <td><%= @driver_drop.description %></td>
-   <td><a class="btn" href="#">Package Diver Drop</a/></td>
-   <td><a class="btn" href="#">Create Drop Mail</a></td>
-   <td><a class="btn" href="<%= new_driver_drop_log_path(@driver_drop)%>"> Upload Test Logs </a>
+   <td>
+    <div class="btn-group">
+     <button class="btn btn-danger">Work On Drop Here</button>
+     <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+     <span class="caret"></span>
+     </button>
+       <ul class="dropdown-menu">
+       <li>
+        <a href="#">Package Diver Drop</a>
+       </li>
+       <li>
+        <a href="#">Create Drop Mail</a>
+       </li>
+       <li>
+        <a href="<%= new_driver_drop_log_path(@driver_drop)%>">Upload Test Logs</a>
+       </li>
+       <li>
+       <li class="divider"></li>
+       <li>
+        <li>
+        <a href="<%= edit_driver_drop_path(@driver_drop) %>">Edit Drop Details</a>
+       </li>
+       </ul>
+    </div>
    </td>
-  </tr>
+   </tr>
  </tbody>
 </table>
+
+   
