@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425172644) do
+ActiveRecord::Schema.define(:version => 20130504081629) do
 
   create_table "driver_drops", :force => true do |t|
-    t.integer  "branch"
+    t.string   "branch"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
