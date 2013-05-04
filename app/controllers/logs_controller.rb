@@ -12,7 +12,8 @@ class LogsController < ApplicationController
   end
 
   def edit
-  	binding.pry
+  	flash[:warning] = "This is a warning flash message"
+    binding.pry
   end
 
   def create
@@ -20,12 +21,14 @@ class LogsController < ApplicationController
     @log = Log.create(params[:log])
     @log.driver_drop_id = @driver_drop.id
   	@log[:passfail] = "na"
+    
     if @log.save
-     redirect_to root_url, notice: "Testlog was successfully created."
+      flash[:success] = "Testlog was successfully created."
+      binding.pry
+      redirect_to driver_drop_path(@driver_drop) 
     else
       render :new
     end
-
   end
 
   def show
