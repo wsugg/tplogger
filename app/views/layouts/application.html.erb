@@ -5,29 +5,26 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script src='https://www.google.com/jsapi'></script>
 </head>
 <body>
 
 	<div class="navbar">
     <div class="navbar-inner">
-    <a class="brand" href="#">Title</a>
+    <a class="brand" href="#">TPLogger</a>
     <ul class="nav">
-    <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">Link</a></li>
-    <li><a href="#">Link</a></li>
+     <li class="active"><a href= <%= root_url %>>Home</a></li>
+     <li><a href="<%= new_driver_drop_path %>">New Driver Drop</a></li>
+     <li><a href="#">Bugs</a></li>
     </ul>
     </div>
-    </div>
-
+  </div>
 <div class="container">
 	<div class="row">
 		<div class="span8"><%= yield %></div>
 		<div class="span4"><h2>Latest Driver Drop</h2>
-			Latest Driver Drop table to go here. 
-
-		</div>
+			Latest Driver Drop table to go here. </div>
 	</div>
 </div>
-
 </body>
 </html>

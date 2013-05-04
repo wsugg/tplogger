@@ -1,0 +1,6 @@
+<% if @log.new_record? %>
+  alert("Failed to upload log: <%= j @log.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+  $("#logs").append("<%= j render(@log) %>");
+<% end %>
+

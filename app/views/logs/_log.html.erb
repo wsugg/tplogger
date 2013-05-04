@@ -1,0 +1,11 @@
+<div class="log">
+
+  <%= form_for @log do |log| %>
+  <div class="name"><%= log.name %></div>
+ <% end %>
+
+  <div class="actions">
+    <%= link_to "edit", edit_log_path(testlog) %> |
+    <%= link_to "remove", log, :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+</div>

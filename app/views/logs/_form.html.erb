@@ -1,0 +1,17 @@
+<%= form_for Log.new, :url => {:action => "create"} do |f| %>
+  <p>
+   <%= f.file_field :testlog, multiple: true, name: "log[testlog]" %>   
+  </p>
+  <p>
+    <input class="btn btn-primary" type="submit" value="Upload Logs">
+  </p>
+<% end %>
+
+<script id="template-upload" type="text/x-tmpl">
+<div class="upload">
+  {%=o.name%}
+  <div class="progress">
+   <div class="bar" style="width: 60%"></div>
+  </div>
+</div>
+</script>

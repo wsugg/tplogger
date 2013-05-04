@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+   <th>ID</th>
+   <th>Branch</th>
+   <th>Description</th>
+   <th></th>
+  </thead>
+  <tbody>
+  <tr>
+   <td><%= @driver_drop.id %></td>
+   <td><%= @driver_drop.branch %></td>
+   <td><%= @driver_drop.description %></td>
+   <td><a class="btn" href="#">Package Diver Drop</a/></td>
+   <td><a class="btn" href="#">Create Drop Mail</a></td>
+   <td><a class="btn" href="<%= new_driver_drop_log_path(@driver_drop)%>"> Upload Test Logs </a>
+   </td>
+  </tr>
+ </tbody>
+</table>

@@ -11,13 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409063839) do
+ActiveRecord::Schema.define(:version => 20130425172644) do
 
   create_table "driver_drops", :force => true do |t|
     t.integer  "branch"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "testlog"
+  end
+
+  create_table "logs", :force => true do |t|
+    t.string   "name"
+    t.string   "passfail"
+    t.integer  "driver_drop_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "testlog"
+  end
+
+  add_index "logs", ["driver_drop_id"], :name => "index_logs_on_driver_drops_id"
+
+  create_table "testlogs", :force => true do |t|
+    t.string   "filename"
+    t.string   "passfail"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "driver_drop_id"
+    t.string   "log_file_name"
+    t.string   "log_content_type"
+    t.integer  "log_file_size"
   end
 
 end
