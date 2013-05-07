@@ -2,7 +2,6 @@ class DriverDropsController < ApplicationController
 
   def index
    @driver_drops = DriverDrop.all
-   @logs = Log.all
    data_table = GoogleVisualr::DataTable.new
    
    data_table.new_column('string', 'Branch' )
