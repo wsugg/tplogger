@@ -2,6 +2,7 @@ class DriverDropsController < ApplicationController
 
   def index
    @driver_drops = DriverDrop.all
+   @logs = Log.all
    data_table = GoogleVisualr::DataTable.new
    
    data_table.new_column('string', 'Branch' )
@@ -9,9 +10,8 @@ class DriverDropsController < ApplicationController
    data_table.new_column('number', 'Failures')
 
    @driver_drops.each do |drop|
-    data_table.add_rows([[drop.branch.to_s, rand + 1, rand + 1 ],])
+    data_table.add_rows([[drop.branch.to_s, rand + 1, Log.where(:driver_drop_id => drop.id, :passfail => "failed").count ],])
    end
-   
 
    option = { width: 700, height: 500, title: '',  
               vAxis: {title: 'Driver Branch', titleTextStyle: {color: 'green'}},
