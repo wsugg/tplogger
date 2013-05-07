@@ -15,7 +15,11 @@ class DriverDropsController < ApplicationController
       [@driver_drops[3].branch.to_s, 1, 5]
       ])
 
-   option = { width: 700, height: 500, title: 'Driver Drop Quality', color: 'green' }
+   option = { width: 700, height: 500, title: '',  
+              vAxis: {title: 'Driver Branch', titleTextStyle: {color: 'green'}},
+              hAxis: {title: 'Failures', titleTextStyle: {color: 'red'}}
+            }
+
    @chart = GoogleVisualr::Interactive::BarChart.new(data_table, option)
    #binding.pry
   end
