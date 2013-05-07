@@ -16,6 +16,10 @@ Tplogger::Application.routes.draw do
         resources :logs
      end
 
+     resources :packages do
+     end
+
+
   # Sample resource route with options:
   #   resources :products do
   #     member do

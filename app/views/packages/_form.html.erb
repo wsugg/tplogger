@@ -1,0 +1,6 @@
+<%= simple_form_for @package do |f| %>
+ <%= f.input :source_path %>
+ <%= f.input :inf_path %>
+ <%= f.input :destination_path %>
+ <button class="btn btn-danger" <%= f.button :submit %> Do It!</button>
+<% end %>

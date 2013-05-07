@@ -8,12 +8,10 @@ class DriverDropsController < ApplicationController
    data_table.new_column('number', 'Bugs')
    data_table.new_column('number', 'Failures')
 
-   data_table.add_rows([
-      [@driver_drops[0].branch.to_s, 10, 4],
-      [@driver_drops[1].branch.to_s, 7, 60],
-      [@driver_drops[2].branch.to_s, 6, 112],
-      [@driver_drops[3].branch.to_s, 1, 5]
-      ])
+   @driver_drops.each do |drop|
+    data_table.add_rows([[drop.branch.to_s, rand + 1, rand + 1 ],])
+   end
+   
 
    option = { width: 700, height: 500, title: '',  
               vAxis: {title: 'Driver Branch', titleTextStyle: {color: 'green'}},
