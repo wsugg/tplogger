@@ -24,8 +24,8 @@ class LogsController < ApplicationController
     
     if @log.save
       flash[:success] = "Testlog was successfully created."
-      binding.pry
       redirect_to driver_drop_path(@driver_drop) 
+      parse_log
     else
       render :new
     end
@@ -33,5 +33,17 @@ class LogsController < ApplicationController
 
   def show
     @log = Log.find(params[:id])
+  end
+
+  private 
+  def parse_log
+    require 'nokogiri'
+    logfile = nil
+    flash[:success] = "parse log function was called."
+    logfile = Nokogiri::XML(File.open(@log.testlog.path))
+    if logfile.xpath("//PFRollup").attribute("Failed").to_s != "0"
+      @log.passfail = "failed"
+      @log.save
+    end
   end
 end

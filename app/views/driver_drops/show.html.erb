@@ -41,7 +41,8 @@
 <p>
 <h2><%= @driver_drop.branch %> Log Files</h2>
 <% @log.each do |l| %>
-
-<strong>Name:</strong>    <%= l.name %><br>
+ <% if l.passfail == "failed" %>
+ <strong>Name:</strong>    <%= l.name %>   <strong><%= l.passfail  %></strong><br>
+ <% end %>
 <% end %>
    
