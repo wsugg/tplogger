@@ -7,9 +7,11 @@ class DriverDropsController < ApplicationController
    data_table.new_column('string', 'Branch' )
    data_table.new_column('number', 'Bugs')
    data_table.new_column('number', 'Failures')
-
+#binding.pry
    @driver_drops.each do |drop|
-    data_table.add_rows([[drop.branch.to_s, rand + 1, Log.where(:driver_drop_id => drop.id, :passfail => "failed").count ],])
+    data_table.add_rows([[drop.branch.to_s,
+                          rand + 1, 
+                          Log.where(:driver_drop_id => drop.id, :passfail => "failed").count],])
    end
 
    option = { width: 700, height: 500, title: '',  
@@ -19,8 +21,8 @@ class DriverDropsController < ApplicationController
 
 
    @chart = GoogleVisualr::Interactive::BarChart.new(data_table, option)
-   @chart.add_listener("ready", "addBranchLink")
-   #binding.pry
+   @chart.add_listener('ready', "window.addBranchLink")
+   
   end
 
   def new

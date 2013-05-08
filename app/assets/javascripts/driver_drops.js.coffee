@@ -1,9 +1,9 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
-addBranchLink = ->
-  for text in $('#chart').find('text[text-anchor="end"]')
-    branch = text.innerHTML
-    link = "<a href='/driver_drops/1/'>#{branch}</a>"
-    text.innerHTML = link
+ 
+window.addBranchLink = ->
+  for t in $('#chart').find('text[text-anchor="end"]')
+    branch = t.innerHTML;
+    link = ("<a href='/driver_drop/1/'>#{branch}</a>") ;
+    #alert("#{t.textContent}");     

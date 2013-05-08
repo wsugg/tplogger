@@ -8,13 +8,12 @@
   <script src='https://www.google.com/jsapi'></script>
 </head>
 <body>
-
 	<div class="navbar">
     <div class="navbar-inner">
-    <a class="brand" href="#">TPLogger</a>
+    <a class="brand" href= <%= root_url %> >TPLogger</a>
     <ul class="nav">
      <li class="active"><a href= <%= root_url %>>Home</a></li>
-     <li><a href="<%= new_driver_drop_path %>">New Driver Drop</a></li>
+     <li><a href= <%= new_driver_drop_path %> >New Driver Drop</a></li>
      <li><a href="#">Bugs</a></li>
      <li><a  href= <%= new_package_path %>>Package a Diver Drop</a/></li>
      <li><a  href="#">Create Drop Mail</a></li>
@@ -22,10 +21,9 @@
     </div>
   </div>
 <div class="container">
-
 	<div class="row">
-		<div class="span8"><%= yield %>
-      
+		<div class="span8">
+      <%= yield %>
     </div>
 		<div class="span4">
         <%= bootstrap_flash %>
