@@ -2,4 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-
+addBranchLink = ->
+  for text in $('#chart').find('text[text-anchor="end"]')
+    branch = text.innerHTML
+    link = "<a href='/driver_drops/1/'>#{branch}</a>"
+    text.innerHTML = link

@@ -10,10 +10,4 @@ class Log < ActiveRecord::Base
   def default_name
     self.name ||= File.basename(testlog.filename, '.*').titleize if testlog
   end
-
-  def parse_log
-  	
-  end
-
-
 end

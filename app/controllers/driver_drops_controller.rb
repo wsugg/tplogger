@@ -17,7 +17,9 @@ class DriverDropsController < ApplicationController
               hAxis: {title: 'Failures', titleTextStyle: {color: 'red'}}
             }
 
+
    @chart = GoogleVisualr::Interactive::BarChart.new(data_table, option)
+   @chart.add_listener("ready", "addBranchLink")
    #binding.pry
   end
 
