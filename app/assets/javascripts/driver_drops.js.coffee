@@ -5,5 +5,5 @@
 window.addBranchLink = ->
   for t in $('#chart').find('text[text-anchor="end"]')
     branch = t.innerHTML;
-    link = ("<a href='/driver_drop/1/'>#{branch}</a>") ;
+    t.textContent = ("<a href='/driver_drop/1/'>#{branch}</a>") ;
     #alert("#{t.textContent}");     
