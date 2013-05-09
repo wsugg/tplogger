@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
  
 window.addBranchLink = ->
-  $(chart).find('text[text-anchor="end"]').wrapInner("<a href='/driver_drops/1/'></a>")
+  #$(chart).find('text[text-anchor="end"]').wrapInner("<a href='/driver_drops/1/'></a>")
 
   #for t in $('#chart').find('text[text-anchor="end"]')
     #branch = t.innerHTML;

@@ -9,10 +9,13 @@ class DriverDropsController < ApplicationController
    data_table.new_column('number', 'Failures')
 #binding.pry
    @driver_drops.each do |drop|
-    data_table.add_rows([[drop.branch.to_s,
+    data_table.add_rows([["<a href='driver_drop/#{drop.id}/'>#{drop.branch.to_s}</a>",
                           rand + 1, 
                           Log.where(:driver_drop_id => drop.id, :passfail => "failed").count],])
    end
+   #formatter = GoogleVisualr::PatternFormat.new('<a href="driver_drop/{1}">{}</a>')
+
+
 
    option = { width: 700, height: 500, title: '',  
               vAxis: {title: 'Driver Branch', titleTextStyle: {color: 'green'}},
