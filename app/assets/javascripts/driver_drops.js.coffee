@@ -2,12 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
  
-window.addBranchLink = ->
-  #$(chart).find('text[text-anchor="end"]').wrapInner("<a href='/driver_drops/1/'></a>")
+window.selectHandler = ->
+ $(document).ready()
+ md = $(chart).mousedown()
+ text = $("#chart").find('text[text-anchor="start"]')
+ t = text[2].textContent;
+ ddrop = $('.drop').children()
 
-  #for t in $('#chart').find('text[text-anchor="end"]')
-    #branch = t.innerHTML;
-    #t.wrapInner("<a href='/driver_drops/1/'></a>");
-    #t.innerHTML = ("<a href='/driver_drop/1/'>#{branch}</a>") ;
-    #alert("#{t.textContent}");     
-
+ for d in ddrop 
+  if d.innerHTML.match(t) 
+   #alert("we did it #{d.href}   #{t}")
+   d.click()

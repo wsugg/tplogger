@@ -1,25 +1,11 @@
 <div class="page-header">
 <h1>Driver Drop Quality</h1>
 </div>
-<table class="table">
- <thead>
- <!--  <th>ID</th>
-  <th>Branch</th>
-  <th>Description</th> -->
-  <th>Link to Drop</th>
-</thead>
-  <div id='chart'></div>
+  <div class="drop">
+    <% @driver_drops.each do |drop| %>
+      <%= link_to drop.branch, drop %> 
+    <% end %>
+  </div> 
+   <div id='chart'></div>
     <%= render_chart(@chart, 'chart') %>
   </div>
-
-<tbody>
-  <% @driver_drops.each do |drop| %>
-  <tr>
-  <!--  <td><%= drop.id %></td>
-   <td><%= drop.branch %></td>
-   <td><%= drop.description %></td> -->
-   <td><%= link_to drop.branch, drop %></td>
-  </tr>
- <% end %>
-</tbody>
-</table> 

@@ -5,27 +5,32 @@ class DriverDropsController < ApplicationController
    data_table = GoogleVisualr::DataTable.new
    
    data_table.new_column('string', 'Branch' )
-   data_table.new_column('number', 'Bugs')
-   data_table.new_column('number', 'Failures')
-#binding.pry
+   data_table.new_column('number', 'x86 Failures')
+   data_table.new_column('number', 'x64 Failures')
+   
+#binding.pry "<a href='/driver_drop/#{drop.id}/'>#{drop.branch.to_s}</a>"
    @driver_drops.each do |drop|
-    data_table.add_rows([["<a href='driver_drop/#{drop.id}/'>#{drop.branch.to_s}</a>",
+    data_table.add_rows([[drop.branch , 
                           rand + 1, 
-                          Log.where(:driver_drop_id => drop.id, :passfail => "failed").count],])
+                          Log.where(:driver_drop_id => drop.id, :passfail => "failed").count,
+                          ]])
+
    end
    #formatter = GoogleVisualr::PatternFormat.new('<a href="driver_drop/{1}">{}</a>')
 
 
 
-   option = { width: 700, height: 500, title: '',  
+   option = { width: 700, height: 500,   
               vAxis: {title: 'Driver Branch', titleTextStyle: {color: 'green'}},
               hAxis: {title: 'Failures', titleTextStyle: {color: 'red'}}
             }
 
 
    @chart = GoogleVisualr::Interactive::BarChart.new(data_table, option)
-   @chart.add_listener('ready', "window.addBranchLink")
-   
+   #@chart.add_listener('ready', "window.addBranchLink")
+   @chart.add_listener('select', "window.selectHandler")
+   #binding.pry
+
   end
 
   def new
