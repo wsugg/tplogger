@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507043622) do
+ActiveRecord::Schema.define(:version => 20130517052415) do
 
   create_table "driver_drops", :force => true do |t|
     t.string   "branch"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130507043622) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "testlog"
+    t.string   "platform"
   end
 
   add_index "logs", ["driver_drop_id"], :name => "index_logs_on_driver_drops_id"

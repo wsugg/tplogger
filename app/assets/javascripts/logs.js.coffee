@@ -13,7 +13,8 @@ jQuery ->
      data.submit()
     else
      alert("#{file.name} is not a pdf or xml file")
+  
    progress: (e, data) ->
-     if data.context
-      progress = parseInt(data.loaded / data.total * 100, 10)
-      data.context.find('.bar').css('width', progress + '%')
+    if data.context
+     progress = parseInt(data.loaded / data.total * 100, 10)
+     data.context.find('.bar').css('width', progress + '%')

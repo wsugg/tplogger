@@ -39,10 +39,43 @@
  </tbody>
 </table>
 <p>
-<h2><%= @driver_drop.branch %> Log Files</h2>
-<% @log.each do |l| %>
- <% if l.passfail == "failed" %>
- <strong>Name:</strong>    <%= l.name %>   <strong><%= l.passfail  %></strong><br>
- <% end %>
-<% end %>
-   
+<h2><u><%= @driver_drop.branch %>Log Files</u></h2>
+
+<table class="table">
+<thead>
+  <tr>
+<th>x86 Failures</th>
+</tr>
+<tr>
+<th>x64 Failures</th>
+</tr>
+<tr>
+<th><h3>Unknown Platform Failures<h3></th>
+</tr>
+</thead>
+<tbody>
+ <% @log.where(:passfail => "failed" , :platform => "x86").each do |l| %>
+    <tr>
+     <td> <strong>Name:</strong>   <%= l.name %>   <%= l.platform %><br></td>
+    </tr>
+    <% end %>
+    
+    <% @log.where(:passfail => "failed" , :platform => "AMD64").each do |l| %>
+    <tr>
+     <td><strong>Name:</strong>    <%= l.name %>   <%= l.platform %><br></td>
+    </tr>
+   <% end %>
+
+   <% @log.where(:passfail => "failed" , :platform => nil ).each do |l| %>
+    <tr>
+     <td><%= l.name %>   <%= l.platform %><br></td>
+    </tr>
+   <% end %>
+</tbody>
+</table>
+<p>
+<p>
+<p>
+<%= @log.count %> Log files have been uploaded and processed for this driver drop.
+<p>
+<%= @log.where(:platform => nil).count %> Total number of log files with "unknown" platform.

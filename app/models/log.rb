@@ -5,7 +5,6 @@ class Log < ActiveRecord::Base
   mount_uploader :testlog, TestlogUploader
   #mount_uploader :log, LogUploader
   before_create :default_name
-  after_create :parse_log
 
   def default_name
     self.name ||= File.basename(testlog.filename, '.*').titleize if testlog
