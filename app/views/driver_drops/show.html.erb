@@ -39,43 +39,36 @@
  </tbody>
 </table>
 <p>
-<h2><u><%= @driver_drop.branch %>Log Files</u></h2>
+
 
 <table class="table">
 <thead>
-  <tr>
-<th>x86 Failures</th>
-</tr>
-<tr>
-<th>x64 Failures</th>
-</tr>
-<tr>
-<th><h3>Unknown Platform Failures<h3></th>
-</tr>
+  <th>x86 Failures</th>
 </thead>
 <tbody>
- <% @log.where(:passfail => "failed" , :platform => "x86").each do |l| %>
-    <tr>
-     <td> <strong>Name:</strong>   <%= l.name %>   <%= l.platform %><br></td>
-    </tr>
+  <tr>
+   <% @x86log.each do |x| %> 
+    <tr><td> id:<%= x.id %>  <%= x.name %></td></tr>
     <% end %>
-    
-    <% @log.where(:passfail => "failed" , :platform => "AMD64").each do |l| %>
-    <tr>
-     <td><strong>Name:</strong>    <%= l.name %>   <%= l.platform %><br></td>
-    </tr>
-   <% end %>
+  </tr>
+</tbody>
+</table>
 
-   <% @log.where(:passfail => "failed" , :platform => nil ).each do |l| %>
-    <tr>
-     <td><%= l.name %>   <%= l.platform %><br></td>
-    </tr>
-   <% end %>
+<table class="table">
+<thead>
+    <th>x64 Failures</th>
+</thead>
+<tbody>
+  <tr>
+   <% @x64log.each do |x| %> 
+   <tr> <td> id:<%= x.id %>  <%= x.name %></td></tr>
+    <% end %>   
+  </tr>
 </tbody>
 </table>
 <p>
 <p>
 <p>
-<%= @log.count %> Log files have been uploaded and processed for this driver drop.
+<%= @log_count %> Log files have been uploaded and processed for this driver drop.
 <p>
-<%= @log.where(:platform => nil).count %> Total number of log files with "unknown" platform.
+<%= @log_nill_count %> Total number of log files with "unknown" platform. <br>

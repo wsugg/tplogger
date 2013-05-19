@@ -8,18 +8,13 @@ class DriverDropsController < ApplicationController
    data_table.new_column('number', 'x86 Failures')
    data_table.new_column('number', 'x64 Failures')
    
-#binding.pry "<a href='/driver_drop/#{drop.id}/'>#{drop.branch.to_s}</a>"
    @driver_drops.each do |drop|
     data_table.add_rows([[drop.branch , 
                           rand + 1, 
                           Log.where(:driver_drop_id => drop.id, :passfail => "failed").count,
                           ]])
-
-   end
-   #formatter = GoogleVisualr::PatternFormat.new('<a href="driver_drop/{1}">{}</a>')
-
-
-
+  end
+  
    option = { width: 700, height: 500,   
               vAxis: {title: 'Driver Branch', titleTextStyle: {color: 'green'}},
               hAxis: {title: 'Failures', titleTextStyle: {color: 'red'}}
@@ -68,7 +63,16 @@ class DriverDropsController < ApplicationController
 
   def show
     @driver_drop = DriverDrop.find(params[:id])
-    @log = Log.where({:driver_drop_id => params[:id]})
+    @x86log = Log.where(:driver_drop_id => params[:id], 
+                        :passfail => "failed",
+                        :platform => "x86")
+
+    @x64log = Log.where(:driver_drop_id => params[:id], 
+                        :passfail => "failed",
+                        :platform => "AMD64")
+
+    @log_count = Log.where(:driver_drop_id => params[:id]).count
+    @log_nill_count = Log.where(:platform => nil).count
     #binding.pry
   end
 end

@@ -31,18 +31,7 @@ class LogsController < ApplicationController
   end
 
   def show
-    binding.pry
-    @log = Log.find(params[:id])
-    binding.pry
-    @log.each do  |l|
-     if l.passfail == "failed" && l.platform == "x86"
-        @x86_failed_logs += l 
-     elsif l.passfail == "failed" && l.platform == "AMD64"
-        @x64_failed_logs += l
-     else
-        @unknown_platform_logs += l
-     end
-     binding.pry
+    flash[:success] = params
   end
 
 private 
