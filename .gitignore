@@ -18,3 +18,5 @@
 paperclip_notice.txt*
 .gitignore~
 /*samples/*
+
+/config/secrets.yml

@@ -38,17 +38,22 @@
    </tr>
  </tbody>
 </table>
-<p>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <table class="table">
 <thead>
   <th>x86 Failures</th>
+  <th>Command Line</th>
+  <th>Bug Number</th>
 </thead>
 <tbody>
   <tr>
    <% @x86log.each do |x| %> 
-    <tr><td> id:<%= x.id %>  <%= x.name %></td></tr>
+    <tr><td> id:<%= x.id %>  <%= x.name %>  </td><td>    <%= x.cmdline %></td><td></td></tr>
     <% end %>
   </tr>
 </tbody>
@@ -57,18 +62,24 @@
 <table class="table">
 <thead>
     <th>x64 Failures</th>
+    <th>Command Line</th>
+    <th>Bug Number</th>
 </thead>
 <tbody>
   <tr>
    <% @x64log.each do |x| %> 
-   <tr> <td> id:<%= x.id %>  <%= x.name %></td></tr>
+   <tr> <td> id:<%= x.id %>  <%= x.name %></td><td><%= x.cmdline %></td><td></td></tr>
     <% end %>   
   </tr>
 </tbody>
 </table>
 <p>
 <p>
+<br>
+<br>
+<br>
 <p>
-<%= @log_count %> Log files have been uploaded and processed for this driver drop.
+
+<%= @log.count %> Log files have been uploaded and processed for this driver drop.
 <p>
 <%= @log_nill_count %> Total number of log files with "unknown" platform. <br>

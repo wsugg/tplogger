@@ -8,12 +8,12 @@ class DriverDropsController < ApplicationController
    data_table.new_column('number', 'x86 Failures')
    data_table.new_column('number', 'x64 Failures')
    
-   @driver_drops.each do |drop|
-    data_table.add_rows([[drop.branch , 
-                          rand + 1, 
+    @driver_drops.each do |drop|
+     data_table.add_rows([[drop.branch , 
+                          rand + 4, 
                           Log.where(:driver_drop_id => drop.id, :passfail => "failed").count,
                           ]])
-  end
+    end
   
    option = { width: 700, height: 500,   
               vAxis: {title: 'Driver Branch', titleTextStyle: {color: 'green'}},
@@ -63,16 +63,19 @@ class DriverDropsController < ApplicationController
 
   def show
     @driver_drop = DriverDrop.find(params[:id])
-    @x86log = Log.where(:driver_drop_id => params[:id], 
+    @log = Log.where(:driver_drop_id => params[:id])
+    @x86log = @log.where(:driver_drop_id => params[:id], 
                         :passfail => "failed",
                         :platform => "x86")
 
-    @x64log = Log.where(:driver_drop_id => params[:id], 
+    @x64log = @log.where(:driver_drop_id => params[:id], 
                         :passfail => "failed",
                         :platform => "AMD64")
 
-    @log_count = Log.where(:driver_drop_id => params[:id]).count
-    @log_nill_count = Log.where(:platform => nil).count
-    #binding.pry
+    @log_count = @log.where(:driver_drop_id => params[:id]).count
+    @log_nill_count = @log.where(:platform => nil).count
+
+    @log_group = @log.where(:driver_drop_id => params[:id], 
+                           :passfail => "failed").group_by(&:platform)
   end
 end
