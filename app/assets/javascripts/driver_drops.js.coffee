@@ -4,7 +4,7 @@
 
 window.selectHandler = ->
  $(document).ready()
- md = $(chart).mousedown()
+ md = $("#chart").mousedown()
  text = $("#chart").find('text[text-anchor="start"]')
  t = text[2].textContent;
  ddrop = $('.drop').children()

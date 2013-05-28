@@ -1,0 +1,5 @@
+<%= simple_form_for(@driver_drop) do |f| %>
+ <%= f.input :branch %>
+ <%= f.input :description %>
+ <%= f.button :submit , :action => 'send_mail'%>
+<% end %>

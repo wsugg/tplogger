@@ -4,6 +4,7 @@
    <th>Branch</th>
    <th>Description</th>
    <th></th>
+   <th>Path to Logs</th>
   </thead>
   <tbody>
   <tr>
@@ -21,7 +22,7 @@
         <a href= <%= new_package_path %> >Package Diver Drop</a>
        </li>
        <li>
-        <a href="#">Create Drop Mail</a>
+        <a href= <%= driver_drop_path(@driver_drop, :action => 'send_mail') %> >Create Drop Mail</a>
        </li>
        <li>
         <a href= <%= new_driver_drop_log_path(@driver_drop)%> >Upload Test Logs</a>
@@ -34,6 +35,13 @@
        </li>
        </ul>
     </div>
+   </td>
+   <td>
+    <%= form_for @driver_drop do |f| %>
+    32bit: <%= f.text_field :logpath %> <br>
+    64bit: <%= f.text_field :x64logpath %> <br>
+     <input class="btn btn-primary" type="submit" value="Git'er done">
+    <%end%>
    </td>
    </tr>
  </tbody>
@@ -73,6 +81,20 @@
   </tr>
 </tbody>
 </table>
+<table class="table">
+<thead>
+    <th>Unknown Platform in Log</th>
+    <th>Command Line</th>
+    <th>Bug Number</th>
+</thead>
+<tbody>
+  <tr>
+   <% @unknown.each do |u| %> 
+   <tr> <td> id:<%= u.id %>  <%= u.name %></td><td><%= u.cmdline %></td><td></td></tr>
+    <% end %>   
+  </tr>
+</tbody>
+</table>
 <p>
 <p>
 <br>
@@ -83,3 +105,11 @@
 <%= @log.count %> Log files have been uploaded and processed for this driver drop.
 <p>
 <%= @log_nill_count %> Total number of log files with "unknown" platform. <br>
+<script id="template-upload" type="text/x-tmpl">
+<div class="upload">
+  {%=o.name%}
+  <div class="progress">
+   <div class="bar" style="width: 0%"></div>
+  </div>
+</div>
+</script>

@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
+ENV.update YAML.load(File.read(File.expand_path('../secrets.yml', __FILE__)))
+
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -11,8 +12,6 @@ end
 
 module Tplogger
   class Application < Rails::Application
-    
-    ENV.update YAML.load(File.read(File.expand_path('../secrets.yml', __FILE__)))
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

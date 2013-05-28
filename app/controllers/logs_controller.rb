@@ -17,14 +17,14 @@ class LogsController < ApplicationController
 
   def create
     @driver_drop = DriverDrop.find(params[:driver_drop_id])
-    @log = Log.new(params[:log])
+    @log = Log.create(params[:log])
     @log.driver_drop_id = @driver_drop.id
   	@log[:passfail] = "na"
     
     if @log.save
       flash[:success] = "#{@log.default_name} was saved."
       redirect_to driver_drop_path(@driver_drop) 
-      parse_log
+      parse_log(@log.testlog.path)
     else
       render :new
     end
@@ -34,8 +34,9 @@ class LogsController < ApplicationController
     flash[:success] = params
   end
 
+
 private 
-    def parse_log
+    def parse_log(logf)
       require 'nokogiri'
       logfile = nil
       logfile = Nokogiri::XML(File.open(@log.testlog.path))

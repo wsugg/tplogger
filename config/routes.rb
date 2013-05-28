@@ -12,6 +12,8 @@ Tplogger::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
      
+     match 'send_mail' => 'driver_drop#send_mail'
+
      resources :driver_drops do
         resources :logs
      end

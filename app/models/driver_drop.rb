@@ -1,5 +1,5 @@
 class DriverDrop < ActiveRecord::Base
-  attr_accessible :branch, :description
+  attr_accessible :branch, :description, :logpath, :x64logpath
 
   validates :branch, :description, :presence => :true
 
