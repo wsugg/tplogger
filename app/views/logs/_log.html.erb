@@ -1,11 +1,11 @@
-<div class="log">
+Log Name: <%= @log.name %><br>
+Command Line: <%= @log.cmdline %><br>
+<%= simple_form_for([@driver_drop, @log]) do |f| %>
+<%= f.input :bugnum %>
+<input class="btn btn-primary" type="submit" value="Bug it!">
+<%end%>
+<br>
+<br>
+<br>
+<%= link_to "Back to Driver Drop", driver_drop_path(@log.driver_drop_id)  %>
 
-  <%= form_for @log do |log| %>
-  <div class="name"><%= log.name %></div>
- <% end %>
-
-  <div class="actions">
-    <%= link_to "edit", edit_log_path(testlog) %> |
-    <%= link_to "remove", log, :confirm => 'Are you sure?', :method => :delete %>
-  </div>
-</div>

@@ -11,5 +11,4 @@ window.selectHandler = ->
 
  for d in ddrop 
   if d.innerHTML.match(t) 
-   #alert("we did it #{d.href}   #{t}")
-   d.click()
+   d.click()   

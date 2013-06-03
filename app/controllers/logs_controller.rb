@@ -1,8 +1,9 @@
 class LogsController < ApplicationController
-#binding.pry
+ before_filter :find_driver_drop, :only => [:new, :create, :edit, :update ]
+ before_filter :find_all_drops, :only => [:new, :show, :index, :edit]
+
   def new
-    @driver_drop = DriverDrop.find(params[:driver_drop_id])
-  	@log = Log.new
+    @log = Log.new
     @log.driver_drop_id = @driver_drop.id
   end
 
@@ -11,12 +12,10 @@ class LogsController < ApplicationController
   end
 
   def edit
-  	flash[:warning] = "This is a warning flash message"
-    binding.pry
+    @log = Log.find(params[:id])
   end
 
   def create
-    @driver_drop = DriverDrop.find(params[:driver_drop_id])
     @log = Log.create(params[:log])
     @log.driver_drop_id = @driver_drop.id
   	@log[:passfail] = "na"
@@ -30,10 +29,28 @@ class LogsController < ApplicationController
     end
   end
 
+  def update
+    @log  =Log.find(params[:id])
+     if @log.update_attributes(params[:log])
+      flash[:success] = "The Log Record was changed."
+      redirect_to driver_drop_path(@log.driver_drop_id)
+    else
+      flash[:error] = "The Log Record was not changed."
+      render action: "edit"
+    end
+  end
+
   def show
     flash[:success] = params
   end
 
+protected
+ def find_driver_drop
+  @driver_drop = DriverDrop.find(params[:driver_drop_id])
+ end 
+ def find_all_drops
+  @driver_drops = DriverDrop.all
+ end 
 
 private 
     def parse_log(logf)
@@ -49,6 +66,5 @@ private
         flash[:warning] = "Failures found in #{@log.default_name} and were processed."
       end
       @log.save
-      #binding.pry
     end
 end

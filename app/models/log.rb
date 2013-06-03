@@ -1,6 +1,6 @@
 class Log < ActiveRecord::Base
   belongs_to :driver_drops
-  attr_accessible :filename, :passfail, :id, :driver_drop_id, :testlog, :log, :name
+  attr_accessible :filename, :passfail, :id, :driver_drop_id, :testlog, :log, :name, :bugnum
 
   mount_uploader :testlog, TestlogUploader
   #mount_uploader :log, LogUploader

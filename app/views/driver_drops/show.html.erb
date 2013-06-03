@@ -19,10 +19,10 @@
      </button>
        <ul class="dropdown-menu">
        <li>
-        <a href= <%= new_package_path %> >Package Diver Drop</a>
+        <a href="#" <%= new_package_path %> >Package Diver Drop</a>
        </li>
        <li>
-        <a href= <%= driver_drop_path(@driver_drop, :action => 'send_mail') %> >Create Drop Mail</a>
+        <a href="#" <%= driver_drop_path(@driver_drop, :action => 'send_mail') %> >Create Drop Mail</a>
        </li>
        <li>
         <a href= <%= new_driver_drop_log_path(@driver_drop)%> >Upload Test Logs</a>
@@ -51,60 +51,35 @@
 <br>
 <br>
 <br>
-
+<h3> Test Failures </h3>
 <table class="table">
 <thead>
-  <th>x86 Failures</th>
+  <th>OS Platform</th>
+  <th>Test name</th>
   <th>Command Line</th>
   <th>Bug Number</th>
+  <th></th>
 </thead>
 <tbody>
   <tr>
-   <% @x86log.each do |x| %> 
-    <tr><td> id:<%= x.id %>  <%= x.name %>  </td><td>    <%= x.cmdline %></td><td></td></tr>
+   <%@log.each_key do |k| %> 
+     <% @log[k].each do|l|  %>
+         <tr><td><%= l.platform %></td><td><%= l.name %></td><td><%= l.cmdline %></td>
+         <td><%= l.bugnum %></td><td><%= link_to "Bug It!" , edit_driver_drop_log_path(@driver_drop, l.id) %></td></tr>
+      <% end %>
     <% end %>
   </tr>
 </tbody>
 </table>
 
-<table class="table">
-<thead>
-    <th>x64 Failures</th>
-    <th>Command Line</th>
-    <th>Bug Number</th>
-</thead>
-<tbody>
-  <tr>
-   <% @x64log.each do |x| %> 
-   <tr> <td> id:<%= x.id %>  <%= x.name %></td><td><%= x.cmdline %></td><td></td></tr>
-    <% end %>   
-  </tr>
-</tbody>
-</table>
-<table class="table">
-<thead>
-    <th>Unknown Platform in Log</th>
-    <th>Command Line</th>
-    <th>Bug Number</th>
-</thead>
-<tbody>
-  <tr>
-   <% @unknown.each do |u| %> 
-   <tr> <td> id:<%= u.id %>  <%= u.name %></td><td><%= u.cmdline %></td><td></td></tr>
-    <% end %>   
-  </tr>
-</tbody>
-</table>
 <p>
 <p>
 <br>
 <br>
 <br>
+<p>
 <p>
 
-<%= @log.count %> Log files have been uploaded and processed for this driver drop.
-<p>
-<%= @log_nill_count %> Total number of log files with "unknown" platform. <br>
 <script id="template-upload" type="text/x-tmpl">
 <div class="upload">
   {%=o.name%}

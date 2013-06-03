@@ -1,7 +1,10 @@
 require 'nokogiri'
+
 class DriverDropsController < ApplicationController
+  before_filter :find_driver_drop, :only => [:edit, :update, :show, :send_mail]
+  before_filter :find_all_drops, :only => [:new, :show, :index, :edit]
+  
   def index
-   @driver_drops = DriverDrop.all
    data_table = GoogleVisualr::DataTable.new
    
    data_table.new_column('string', 'Branch' )
@@ -22,10 +25,7 @@ class DriverDropsController < ApplicationController
 
 
    @chart = GoogleVisualr::Interactive::BarChart.new(data_table, option)
-   #@chart.add_listener('ready', "window.readyHandler")
    @chart.add_listener('select', "window.selectHandler")
-   #binding.pry
-
   end
 
   def new
@@ -45,13 +45,10 @@ class DriverDropsController < ApplicationController
   end
 
   def edit
-    @driver_drop = DriverDrop.find(params[:id])
-    flash[:info] = "This is a info flash message"
+   
   end
 
   def update
-    @driver_drop = DriverDrop.find(params[:id])
-
     if @driver_drop.update_attributes(params[:driver_drop])
       flash[:success] = "Driver Drop was changed."
       redirect_to driver_drop_path
@@ -64,29 +61,11 @@ class DriverDropsController < ApplicationController
   end
 
   def show
-    @driver_drop = DriverDrop.find(params[:id])
-    @log = Log.where(:driver_drop_id => params[:id])
-    @x86log = @log.where(:driver_drop_id => params[:id], 
-                        :passfail => "failed",
-                        :platform => "x86")
-
-    @x64log = @log.where(:driver_drop_id => params[:id], 
-                        :passfail => "failed",
-                        :platform => "AMD64")
-    @unknown = @log.where(:driver_drop_id => params[:id], 
-                        :passfail => "failed",
-                        :platform => nil )
-
-    @log_count = @log.where(:driver_drop_id => params[:id]).count
-    @log_nill_count = @log.where(:platform => nil).count
-
-    @log_group = @log.where(:driver_drop_id => params[:id], 
-                           :passfail => "failed").group_by(&:platform)
+    @log = Log.where(:driver_drop_id => params[:id],
+                     :passfail => "failed").group_by(&:platform)
   end
 
   def send_mail
-    @driver_drop = DriverDrop.find(params[:id])
-    binding.pry
     email = DropMailer.send_drop_mail(@driver_drop).deliver
     if !email.empty?
      flash[:success] = "Drop mail was successfully created."
@@ -114,7 +93,7 @@ class DriverDropsController < ApplicationController
                                 file.include?(".xslt")  | file.include?(".txt") |
                                 file.include?(".log")   | file.include?(".ini") |
                                 file.include?("ShellRunner.wtl") }
-#binding.pry
+
           files.each do |file|
            parse_log("#{f}/#{file}",file)
           end
@@ -128,30 +107,26 @@ class DriverDropsController < ApplicationController
       logfile = Nokogiri::XML(File.open(logf))
       
       @log = Log.new
-      #@log.testlog = logf
-
       @log.name = fname
-      #logfile.xpath("//TestFileName").attribute("UserText").to_s
       @log.driver_drop_id = @driver_drop.id
-      #binding.pry
-      #res = logfile.xpath("//Machine").attribute("Platform").to_s
-      #puts res
-      #puts logfile
+      
       platform = logfile.xpath("//Machine")
-      #binding.
       if platform.empty?
-       @log.platform = nil
+        if true == p = logfile.xpath("//RTI").attribute("ProcessName").value.include?("x86")
+          @log.platform = "x86"
+        else  
+          @log.platform = "AMD64"
+        end
       else 
        @log.platform = logfile.xpath("//Machine").attribute("Platform").to_s 
       end
-      #logfile.xpath("//PFRollup").attribute("Failed").to_s != "0"
-
-     grollup = logfile.xpath("//GroupRollup")
-     pfrollup = logfile.xpath("//PFRollup")
+      
+      grollup = logfile.xpath("//GroupRollup")
+      pfrollup = logfile.xpath("//PFRollup")
      
-     if grollup.empty? && pfrollup.empty?
-      flash[:error] = "#{logfile} has no rollup section. Might be corrupt."
-     end
+      if grollup.empty? && pfrollup.empty?
+       flash[:error] = "#{logfile} has no rollup section. Might be corrupt."
+      end
 
       if pfrollup.attribute("Failed").to_s != "0"
         @log.passfail = "failed"
@@ -164,4 +139,17 @@ class DriverDropsController < ApplicationController
         flash[:warning] = "Failures found in #{@log.default_name} and were processed."
       end
   end
+
+  def all_drops
+    @driver_drops = DriverDrop.all 
+  end
+
+  protected
+  def find_driver_drop
+    @driver_drop = DriverDrop.find(params[:id])
+  end
+
+  def find_all_drops
+    @driver_drops = DriverDrop.all
+  end 
 end
