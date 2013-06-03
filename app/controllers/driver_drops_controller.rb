@@ -140,10 +140,6 @@ class DriverDropsController < ApplicationController
       end
   end
 
-  def all_drops
-    @driver_drops = DriverDrop.all 
-  end
-
   protected
   def find_driver_drop
     @driver_drop = DriverDrop.find(params[:id])
