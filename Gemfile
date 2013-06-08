@@ -5,7 +5,6 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem "google_visualr", ">= 2.1"
-gem 'sqlite3'
 gem 'less'
 gem 'less-rails'
 gem 'therubyracer', '0.10.2'
@@ -27,6 +26,7 @@ end
 
 group :test, :development do
   gem 'better_errors'
+  gem 'sqlite3'
   gem 'rspec-rails', '~> 2.13.0'
   gem 'pry-rails'
 end
@@ -35,6 +35,9 @@ group :test do
   gem 'capybara', '2.0.3'
 end
 
+group :production do
+  gem 'pg'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
