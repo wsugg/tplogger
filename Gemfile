@@ -4,6 +4,7 @@ gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem "nokogiri"
 gem "google_visualr", ">= 2.1"
 gem 'less'
 gem 'less-rails'

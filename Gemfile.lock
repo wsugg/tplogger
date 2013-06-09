@@ -182,6 +182,7 @@ DEPENDENCIES
   less
   less-rails
   libv8
+  nokogiri
   pg
   pry-rails
   rails (= 3.2.11)
